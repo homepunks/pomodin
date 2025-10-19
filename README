@@ -1,0 +1,15 @@
+like pomofocus.io but in Odin.
+
+Build:
+	# Odin has support for bindings to miniaudio library in its vendor collection
+	# but they don't come prebuilt. Build them first by running:
+	
+	make -C "$HOME/thirdparty/odin-linux-amd64-nightly+2025-10-05/vendor/miniaudio/src"
+
+	# build the project itself (i'm using a symlink to the odin compiler in my $HOME/thirdparty/):
+
+	./odin build .
+
+Use:
+	sudo cp ./pomodin /usr/local/bin/pomodin
+	pomodin 30

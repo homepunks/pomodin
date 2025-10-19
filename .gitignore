@@ -1,0 +1,6 @@
+# i use a symbolic link to call the compiler
+# which i store in the thirdparty directory
+odin
+
+# produced executable
+pomodin
