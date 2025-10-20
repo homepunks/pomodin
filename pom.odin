@@ -22,9 +22,16 @@ main :: proc() {
     time_start := time.tick_now()
     time_goal := time.tick_add(time_start, time.Minute * time.Duration(time_goal_mins))
 
+    progress_bar(time_goal_mins)
     for time.tick_diff(time.tick_now(), time_goal) >= time.Duration(0) {}
 
-    fmt.printfln("congrats! you've focused for %d minutes", time_goal_mins)
+    if time_goal_mins == 1 {
+	fmt.printfln("congrats! you have stayed focused for %d minute!", time_goal_mins)
+    } else {
+    	fmt.printfln("congrats! you have stayed focused for whole %d minutes!", time_goal_mins)
+	fmt.println("keep up the good work")
+    }
+    
     play_audio()
     
     return

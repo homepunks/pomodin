@@ -60,8 +60,7 @@ play_audio :: proc() {
     )
     if sound_result != .SUCCESS {
 	fmt.panicf("ERROR: failed to init sound file from memory: %v\n", sound_result)
-    }
-    
+    } 
     defer ma.sound_uninit(&sound)
     
     ma.sound_start(&sound)
