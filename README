@@ -6,8 +6,7 @@ Build:
 	
 	make -C "odin-linux-amd64-nightly+2025-10-05/vendor/miniaudio/src"
 
-	# build the project itself (i'm using a symlink to the odin compiler in my $HOME/thirdparty/):
-
+	# build the project itself
 	odin build src/ -out:pomodin
 
 Use:
