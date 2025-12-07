@@ -2,10 +2,12 @@ package main
 
 import "core:time"
 import "core:os"
+import "core:io"
 import "core:fmt"
 import "core:strconv"
+import "core:unicode"
 
-main :: proc() {
+main :: proc() {    
     if len(os.args) != 2 {
 	fmt.println("usage: ./pomodin <time in minutes>")
 	return
@@ -23,7 +25,9 @@ main :: proc() {
     time_goal := time.tick_add(time_start, time.Minute * time.Duration(time_goal_mins))
 
     progress_bar(time_goal_mins)
-    for time.tick_diff(time.tick_now(), time_goal) >= time.Duration(0) {}
+    for time.tick_diff(time.tick_now(), time_goal) >= time.Duration(0) {
+	time.sleep(50 * time.Millisecond)
+    }
 
     if time_goal_mins == 1 {
 	fmt.printfln("congrats! you have stayed focused for %d minute!", time_goal_mins)

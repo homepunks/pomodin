@@ -4,3 +4,5 @@ odin
 
 # produced executable
 pomodin
+
+*.bak
