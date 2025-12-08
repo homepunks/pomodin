@@ -7,8 +7,8 @@ import ma "vendor:miniaudio"
 AUDIO_CHANNELS :: 0
 AUDIO_SAMPLE_RATE :: 0
 
-/* you can load any other file from audio/ directory*/
-AUDIO_FILE :: #load("../audio/applause.mp3")
+/* you can load any other file from audio/ directory */
+AUDIO_FILE :: #load("../../audio/applause.mp3")
 
 engine: ma.engine
 decoder: ma.decoder

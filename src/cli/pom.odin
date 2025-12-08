@@ -2,10 +2,8 @@ package main
 
 import "core:time"
 import "core:os"
-import "core:io"
 import "core:fmt"
 import "core:strconv"
-import "core:unicode"
 
 main :: proc() {    
     if len(os.args) != 2 {
