@@ -6,8 +6,11 @@ Build:
 	
 	make -C "odin-linux-amd64-nightly+2025-10-05/vendor/miniaudio/src"
 
-	# build the project itself
-	odin build src/ -out:pomodin
+	# build the project itself (minimal CLI version)
+	odin build src/cli/ -out:pomodin
+
+	# or the GUI
+	odin build src/gui/ -out:pomodin
 
 Use:
 	sudo cp ./pomodin /usr/local/bin/pomodin
