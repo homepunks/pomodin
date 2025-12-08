@@ -3,8 +3,10 @@ package main
 import "core:time"
 import rl "vendor:raylib"
 
+default_timer : u32 : 30 /* in mins */
+state := State{ false, default_timer }
+
 main :: proc() {
-    state := State{ true, 30 }
     window := Window{ "POMODIN", 800, 600, 60 }
     rl.InitWindow(window.width, window.height, window.name)
     rl.SetTargetFPS(window.fps)
@@ -28,7 +30,7 @@ main :: proc() {
 	}
 
 	if press_button(window.width, window.height) {
-	    state.focus_goal_mins = 30
+	    state.focus_goal_mins = default_timer
 	    state.countdown = true
 	    time_goal = time.tick_add(time.tick_now(), time.Minute * time.Duration(state.focus_goal_mins))
 	}
