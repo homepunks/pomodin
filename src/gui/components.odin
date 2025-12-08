@@ -2,6 +2,7 @@ package main
 
 import "core:time"
 import "core:fmt"
+import "core:thread"
 import rl "vendor:raylib"
 
 GRUVBOX_GREY   :: rl.Color{0x28, 0x28, 0x28, 0xFF}
@@ -45,10 +46,9 @@ draw_time :: proc(time_goal: time.Tick) -> (cstring, i32) {
 	mins := total_secs / 60
 	secs := total_secs % 60
 
-	time_str := fmt.ctprintf("%0.2d:%0.2d", mins, secs)
+	time_str := fmt.ctprintf("%02d:%02d", mins, secs)
 	return time_str, rl.MeasureText(time_str, TIME_FONT_SZ) 
     }
 
-    play_audio()
     return "00:00", rl.MeasureText(fmt.ctprint("00:00"), TIME_FONT_SZ)
 }

@@ -9,6 +9,8 @@ main :: proc() {
     rl.SetTargetFPS(window.fps)
     defer rl.CloseWindow()
 
+    countdown := true
+
     time_goal_mins := 1
     time_goal := time.tick_add(time.tick_now(), time.Minute * time.Duration(time_goal_mins))
     
@@ -19,5 +21,12 @@ main :: proc() {
 	rl.ClearBackground(GRUVBOX_GREY)
 
 	draw_timer(window.width, window.height, time_goal)
+
+	if countdown {
+	    if time.tick_diff(time.tick_now(), time_goal) <= time.Duration(0) {
+		countdown = false
+		play_audio()
+	    }
+	}
     }
 }
