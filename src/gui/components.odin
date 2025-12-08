@@ -2,7 +2,6 @@ package main
 
 import "core:time"
 import "core:fmt"
-import "core:thread"
 import rl "vendor:raylib"
 
 GRUVBOX_GREY   :: rl.Color{0x28, 0x28, 0x28, 0xFF}
@@ -17,6 +16,11 @@ Window :: struct {
     width:         i32,
     height:        i32,
     fps:           i32,
+}
+
+State :: struct {
+    countdown: bool,
+    focus_goal_mins: u32,
 }
 
 draw_timer :: proc(window_width: i32, window_height: i32, time_goal: time.Tick) {
@@ -51,4 +55,20 @@ draw_time :: proc(time_goal: time.Tick) -> (cstring, i32) {
     }
 
     return "00:00", rl.MeasureText(fmt.ctprint("00:00"), TIME_FONT_SZ)
+}
+
+press_button :: proc(window_width: i32, window_height: i32) -> bool {
+    rect_width: f32 = 270
+    rect_height: f32 = 120
+
+    rect := rl.Rectangle {
+	x = (f32(window_width) - rect_width)/2,
+        y = f32(window_height) * 0.7,
+        width = rect_width,
+	height = rect_height,
+    }
+
+    defer rl.DrawRectangleRec(rect, GRUVBOX_BLUE)
+    
+    return rl.GuiButton(rect, fmt.ctprint("FOCUS"))
 }
