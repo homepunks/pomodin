@@ -1,5 +1,9 @@
 like pomofocus.io but in Odin.
 
+For the nearest time, you can specify the focus time (30 mins by default) before building.
+Changing it would require a rebuild (change it by altering the default_timer in src/gui/pom.odin).
+Breaktime (with pomodoro logic preserved, e.g. 5-5-5-15 min breaks) will be added soon.
+
 Build:
 	# Odin has support for bindings to miniaudio library in its vendor collection
 	# but they don't come prebuilt. Build them first by running:
