@@ -26,6 +26,7 @@ main :: proc() {
 	    if time.tick_diff(time.tick_now(), time_goal) <= time.Duration(0) {
 		state.countdown = false
 		play_audio()
+		state.remaining_time = time.Minute * time.Duration(state.focus_goal_mins)
 	    }
 	}
 	
