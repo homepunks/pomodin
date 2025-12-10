@@ -88,8 +88,8 @@ press_button :: proc(window_width: i32, window_height: i32) -> bool {
 		      i32(rect.y + rect.height / 2) - BUTTON_FONT_SZ / 2,
 		      BUTTON_FONT_SZ, GRUVBOX_YELLOW)
     defer if state.countdown {
-	rl.DrawRectangleRec(rect, GRUVBOX_PURPLE)
+	rl.DrawRectangleRec(rect, GRUVBOX_AQUA)
     }
-    defer rl.DrawRectangleRec(rect, GRUVBOX_AQUA)
+    defer rl.DrawRectangleRec(rect, GRUVBOX_BLUE)
     return rl.GuiButton(rect, txt)
 }

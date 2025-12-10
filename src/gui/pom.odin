@@ -3,7 +3,7 @@ package main
 import "core:time"
 import rl "vendor:raylib"
 
-default_timer : u32 : 30 /* in mins */
+default_timer : u32 : 1 /* in mins */
 state := State{ false, default_timer }
 
 main :: proc() {
