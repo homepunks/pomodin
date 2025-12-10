@@ -4,7 +4,7 @@ import "core:time"
 import rl "vendor:raylib"
 
 default_timer : u32 : 1 /* in mins */
-state := State{ false, default_timer }
+state := State{ false, default_timer, time.Minute * time.Duration(default_timer) }
 
 main :: proc() {
     window := Window{ "POMODIN", 800, 600, 60 }
@@ -12,7 +12,7 @@ main :: proc() {
     rl.SetTargetFPS(window.fps)
     defer rl.CloseWindow()
 
-    time_goal := time.tick_add(time.tick_now(), time.Minute * time.Duration(state.focus_goal_mins))
+    time_goal := time.tick_add(time.tick_now(), state.remaining_time)    
     
     for !rl.WindowShouldClose() {
 	rl.BeginDrawing()
@@ -28,11 +28,15 @@ main :: proc() {
 		play_audio()
 	    }
 	}
-
-	if press_button(window.width, window.height) {
-	    state.focus_goal_mins = default_timer
-	    state.countdown = true
-	    time_goal = time.tick_add(time.tick_now(), time.Minute * time.Duration(state.focus_goal_mins))
+	
+	if press_button(window.width, window.height) || rl.IsKeyPressed(.SPACE) {
+	    if state.countdown == false {
+		time_goal = time.tick_add(time.tick_now(), state.remaining_time)
+		state.countdown = true
+	    } else {
+		state.countdown = false
+		state.remaining_time = time.tick_diff(time.tick_now(), time_goal)
+	    }
 	}
     }
 }

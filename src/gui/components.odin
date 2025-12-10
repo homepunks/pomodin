@@ -26,6 +26,7 @@ Window :: struct {
 State :: struct {
     countdown: bool,
     focus_goal_mins: u32,
+    remaining_time: time.Duration,
 }
 
 draw_timer :: proc(window_width: i32, window_height: i32, time_goal: time.Tick) {
@@ -64,8 +65,13 @@ draw_time :: proc(time_goal: time.Tick) -> (cstring, i32) {
 	    return time_str, rl.MeasureText(time_str, TIME_FONT_SZ) 
 	}
     }
+
+    remaining_seconds := i32(time.duration_seconds(state.remaining_time))
+    mins := remaining_seconds / 60
+    secs := remaining_seconds % 60
     
-    fallback_time := fmt.ctprintf("%02d:00", default_timer)
+    fallback_time := fmt.ctprintf("%02d:%02d", mins, secs)
+    
     return fallback_time, rl.MeasureText(fallback_time, TIME_FONT_SZ)
 }
 
