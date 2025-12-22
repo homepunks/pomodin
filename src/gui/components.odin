@@ -25,7 +25,9 @@ Window :: struct {
 
 State :: struct {
     countdown: bool,
+    breaktime: bool,
     focus_goal_mins: u32,
+    breaktime_tick: time.Tick,
     remaining_time: time.Duration,
     break_count: u32,
 }

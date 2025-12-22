@@ -3,8 +3,18 @@ package main
 import "core:time"
 import rl "vendor:raylib"
 
-default_timer : u32 : 1 /* in mins */
-state := State{ false, default_timer, time.Minute * time.Duration(default_timer), 0 }
+/* in mins */
+default_timer	    : u32 : 30
+default_break_short : u32 : 5
+default_break_long  : u32 : 15
+
+state := State{ false,
+		false,
+		default_timer,
+		time.tick_now(),
+		time.Minute * time.Duration(default_timer),
+		0,
+	      }
 
 main :: proc() {
     window := Window{ "POMODIN", 800, 600, 60 }
@@ -26,8 +36,26 @@ main :: proc() {
 	    if time.tick_diff(time.tick_now(), time_goal) <= time.Duration(0) {
 		state.countdown = false
 		play_audio()
-		state.remaining_time = time.Minute * time.Duration(state.focus_goal_mins)
-		state.break_count += 1
+
+		if !state.breaktime {
+		    state.break_count += 1
+		    state.breaktime = true
+
+		    break_mins: u32
+		    if state.break_count % 4 == 0 {
+			break_mins = default_break_long
+			state.break_count = 0
+		    } else {
+			break_mins = default_break_short
+			state.break_count += 1
+		    }
+		    
+		    state.remaining_time = time.Minute * time.Duration(break_mins)
+		    state.breaktime_tick = time.tick_add(time.tick_now(), state.remaining_time)
+		} else {   
+		    state.remaining_time = time.Minute * time.Duration(state.focus_goal_mins)
+		    state.breaktime = false
+		}
 	    }
 	}
 	
