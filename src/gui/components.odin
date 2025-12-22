@@ -27,6 +27,7 @@ State :: struct {
     countdown: bool,
     focus_goal_mins: u32,
     remaining_time: time.Duration,
+    break_count: u32,
 }
 
 draw_timer :: proc(window_width: i32, window_height: i32, time_goal: time.Tick) {
@@ -86,7 +87,13 @@ press_button :: proc(window_width: i32, window_height: i32) -> bool {
 	height = rect_height,
     }
 
-    txt    := fmt.ctprint("FOCUS!")
+    txt: cstring
+    if state.countdown {
+	txt = fmt.ctprint("PAUSE")
+    } else {
+	txt = fmt.ctprintf("FOCUS")
+    }
+
     txt_sz := rl.MeasureText(txt, BUTTON_FONT_SZ)
     
     defer rl.DrawText(txt,

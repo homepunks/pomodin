@@ -4,7 +4,7 @@ import "core:time"
 import rl "vendor:raylib"
 
 default_timer : u32 : 1 /* in mins */
-state := State{ false, default_timer, time.Minute * time.Duration(default_timer) }
+state := State{ false, default_timer, time.Minute * time.Duration(default_timer), 0 }
 
 main :: proc() {
     window := Window{ "POMODIN", 800, 600, 60 }
@@ -27,6 +27,7 @@ main :: proc() {
 		state.countdown = false
 		play_audio()
 		state.remaining_time = time.Minute * time.Duration(state.focus_goal_mins)
+		state.break_count += 1
 	    }
 	}
 	
