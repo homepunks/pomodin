@@ -8,13 +8,14 @@ default_timer	    : u32 : 30
 default_break_short : u32 : 5
 default_break_long  : u32 : 15
 
-state := State{ false,
-		false,
-		default_timer,
-		time.tick_now(),
-		time.Minute * time.Duration(default_timer),
-		0,
-	      }
+state := State{ 
+    false,                                      /* focus time status  */
+    false,                                      /* break time status  */
+    default_timer,                              /* default focus time */
+    time.tick_now(),                           		
+    time.Minute * time.Duration(default_timer),
+    0,                                          /* break time counter */
+}
 
 main :: proc() {
     window := Window{ "POMODIN", 800, 600, 60 }
