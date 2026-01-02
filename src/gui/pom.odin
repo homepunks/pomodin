@@ -47,7 +47,6 @@ main :: proc() {
 			state.break_count = 0
 		    } else {
 			break_mins = default_break_short
-			state.break_count += 1
 		    }
 		    
 		    state.remaining_time = time.Minute * time.Duration(break_mins)
